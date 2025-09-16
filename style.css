@@ -1,10 +1,9 @@
-/* Google Font */
 body {
   font-family: 'Poppins', sans-serif;
   scroll-behavior: smooth;
 }
 
-/* Accent Colors */
+/* Accent */
 .text-accent { color: #6C5CE7; }
 .btn-accent {
   background-color: #6C5CE7;
@@ -24,16 +23,35 @@ body {
   padding: 0 20px;
 }
 
+/* Profile Card */
+.profile-card {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease;
+}
+.profile-card:hover {
+  transform: scale(1.05) rotate(3deg);
+}
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* Timeline */
 .timeline-item {
-  background: #fff;
+  background: var(--bs-body-bg);
   padding: 20px;
   margin-bottom: 20px;
   border-left: 5px solid #6C5CE7;
   box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
-/* Custom Cursor */
+/* Cursor */
 .custom-cursor {
   position: fixed;
   width: 25px;
