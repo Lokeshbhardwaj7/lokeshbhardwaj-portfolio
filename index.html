@@ -24,6 +24,8 @@
     <!-- Custom Cursor -->
     <div class="custom-cursor"></div>
 
+    <canvas id="starfield"></canvas>
+
     <!-- Navbar -->
     <nav
       id="mainNavbar"
@@ -113,7 +115,7 @@
 
     <!-- Projects -->
     <section id="projects" class="py-5 container">
-      <h2 class="text-center fw-bold mb-4">Projects</h2>
+      <h2 class="text-center fw-bold mb-4" style="color: white">Projects</h2>
       <div class="row g-4">
         <div class="col-md-6">
           <div class="card shadow h-100">
@@ -164,17 +166,85 @@
       </div>
     </section>
 
+    <!-- Education -->
+    <section id="education" class="py-5 container">
+      <h2 class="text-center fw-bold mb-4" style="color: white">Education</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card shadow h-100">
+            <div class="card-body">
+              <h5 class="card-title">Silver Oak University | Ahmedabad</h5>
+              <p class="card-text">Master of Computer Applications (MCA)</p>
+              <small class="text-muted">2020 – 2022</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card shadow h-100">
+            <div class="card-body">
+              <h5 class="card-title">
+                L.J. College of Computer Applications | Ahmedabad
+              </h5>
+              <p class="card-text">Bachelor of Computer Applications (BCA)</p>
+              <small class="text-muted">2016 – 2019</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-5 bg-body-secondary text-center">
+      <div class="container">
+        <h2 class="fw-bold mb-4">Skills</h2>
+        <div class="d-flex flex-wrap justify-content-center gap-2">
+          <span class="badge bg-primary">React.js</span>
+          <span class="badge bg-secondary">Next.js</span>
+          <span class="badge bg-success">Redux</span>
+          <span class="badge bg-warning text-dark">JavaScript</span>
+          <span class="badge bg-info text-dark">TypeScript</span>
+          <span class="badge bg-danger">HTML5</span>
+          <span class="badge bg-dark">CSS3</span>
+          <span class="badge bg-primary">Tailwind</span>
+          <span class="badge bg-success">Material-UI</span>
+          <span class="badge bg-info text-dark">Node.js</span>
+          <span class="badge bg-warning text-dark">REST APIs</span>
+          <span class="badge bg-dark">GitHub</span>
+          <span class="badge bg-secondary">Agile/Scrum</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="py-5 text-center">
       <div class="container">
-        <h2 class="fw-bold mb-3">Get in Touch</h2>
-        <p class="mb-4">Interested in working together? Let's connect!</p>
-        <a
-          href="mailto:lokeshbhardwajlj@gmail.com"
-          class="btn btn-accent btn-lg"
-          >Email Me</a
+        <h2 class="fw-bold mb-4" style="color: white">Contact Me</h2>
+        <form
+          action="https://formspree.io/f/mvgbjzyz"
+          method="POST"
+          class="mx-auto"
+          style="max-width: 500px"
         >
-        <p class="mt-3">📞 +91 63521 72157</p>
+          <div class="mb-3">
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              placeholder="Your Email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <textarea
+              name="message"
+              class="form-control"
+              rows="4"
+              placeholder="Your Message"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-accent">Send Message</button>
+        </form>
       </div>
     </section>
 
@@ -190,10 +260,28 @@
     <script>
       // Cursor
       const cursor = document.querySelector(".custom-cursor");
+      let mouseX = 0,
+        mouseY = 0;
+      let currentX = 0,
+        currentY = 0;
+
       document.addEventListener("mousemove", (e) => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
+        mouseX = e.clientX;
+        mouseY = e.clientY;
       });
+
+      function lerp(a, b, n) {
+        return (1 - n) * a + n * b;
+      }
+
+      function animate() {
+        currentX = lerp(currentX, mouseX, 0.15);
+        currentY = lerp(currentY, mouseY, 0.15);
+        cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+        requestAnimationFrame(animate);
+      }
+      animate();
+
       document.addEventListener("mousedown", () =>
         cursor.classList.add("active")
       );
@@ -224,6 +312,48 @@
           navbar.classList.remove("scrolled");
         }
       });
+    </script>
+    <script>
+      const canvas = document.getElementById("starfield");
+      const ctx = canvas.getContext("2d");
+
+      let stars = [];
+      let numStars = 100;
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      // create stars
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          speed: Math.random() * 2 + 0.5,
+        });
+      }
+
+      function animateStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "white";
+        stars.forEach((star) => {
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fill();
+
+          star.y += star.speed;
+          if (star.y > canvas.height) {
+            star.y = 0;
+            star.x = Math.random() * canvas.width;
+          }
+        });
+        requestAnimationFrame(animateStars);
+      }
+      animateStars();
     </script>
   </body>
 </html>
