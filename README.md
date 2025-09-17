@@ -1,5 +1,4 @@
 🌐 Lokesh Bhardwaj – Portfolio 
-🚀 Live Demo - https://lokeshbhardwaj-portfolio.onrender.com/
 
 This is my personal portfolio website, built with modern web technologies to showcase my skills, projects, and experience as a Frontend Developer.
 
@@ -84,7 +83,7 @@ Mobile-friendly with responsive breakpoints
 
 📬 Contact
 
-Portfolio: lokeshbhardwaj-portfolio.com
+Portfolio: https://lokeshbhardwaj-portfolio.onrender.com
 
 GitHub: @Lokeshbhardwaj7
 
