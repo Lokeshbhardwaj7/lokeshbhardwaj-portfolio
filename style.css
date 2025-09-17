@@ -21,11 +21,23 @@ body {
 
 /* Hero */
 .hero {
+  position: relative;
   min-height: 100vh;
-  background: linear-gradient(135deg, #6C5CE7, #00BFA6);
-  color: white;
-  padding: 0 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, #6c5ce7, #00bfa6, #ff7675, #74b9ff);
+  background-size: 400% 400%;
+  animation: aurora 12s ease infinite;
 }
+
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
 /* Profile Card */
 .profile-card {
@@ -183,6 +195,14 @@ body {
   filter: brightness(0) invert(1);
 }
 
+.icon-link:hover,
+.icon-link:focus {
+  transform: scale(1.2);
+  color: #007bff;
+  /* or another highlight color */
+}
+
+
 #starfield {
   position: fixed;
   top: 0;
@@ -204,4 +224,28 @@ body {
 .progress-bar {
   font-size: 0.8rem;
   font-weight: 600;
+}
+
+/* Typewriter Effect */
+#typewriter-text {
+  font-weight: 700;
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: #6C5CE7;
+  /* -webkit-text-stroke: 1px #6C5CE7; */
+  text-shadow: 0 0 6px rgba(108, 92, 231, 0.8);
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  width: 2px;
+  background: #fff;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
